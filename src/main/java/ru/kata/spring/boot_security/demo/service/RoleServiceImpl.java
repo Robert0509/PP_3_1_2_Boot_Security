@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class RoleServiceImpl implements RoleService{
+public class RoleServiceImpl implements RoleService {
 
     @Override
     public List<? extends GrantedAuthority> mapRolesToAuthorities(List<Role> roles) {
