@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 
 @Transactional(readOnly = true)
 @Service
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
     private final RoleService roleService;
@@ -28,10 +28,12 @@ public class UserServiceImpl implements UserService{
         this.roleService = roleService;
         this.passwordEncoder = passwordEncoder;
     }
+
     @Override
     public List<User> findAll() {
         return userRepository.findAll();
     }
+
     @Override
     public User findById(int id) {
         Optional<User> optionalUser = userRepository.findById(id);
@@ -40,9 +42,10 @@ public class UserServiceImpl implements UserService{
             Hibernate.initialize(user.getRoles());
             return user;
         } else {
-         throw  new UsernameNotFoundException("No user with such id");
+            throw new UsernameNotFoundException("No user with such id");
         }
     }
+
     @Override
     @Transactional
     public void addUser(User user) {
@@ -52,12 +55,14 @@ public class UserServiceImpl implements UserService{
         user.setRoles(userRoles);
         userRepository.save(user);
     }
+
     @Override
     @Transactional
     public void changeUser(int id, User replaceUser) {
         replaceUser.setId(id);
         addUser(replaceUser);
     }
+
     @Override
     @Transactional
     public void deleteUser(int id) {
@@ -67,12 +72,11 @@ public class UserServiceImpl implements UserService{
     @Override
     public User findByUsername(String username) {
         Optional<User> optionalUser = userRepository.findUserByUsername(username);
-        if (optionalUser.isPresent()){
+        if (optionalUser.isPresent()) {
             User user = optionalUser.get();
             Hibernate.initialize(user.getRoles());
             return user;
-        }
-        else
+        } else
             throw new UsernameNotFoundException("No user with such username");
     }
 

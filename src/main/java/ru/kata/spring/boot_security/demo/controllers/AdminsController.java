@@ -53,7 +53,7 @@ public class AdminsController {
     }
 
     @PostMapping("/new")
-    public String addNewUser (@ModelAttribute("user") User user) {
+    public String addNewUser(@ModelAttribute("user") User user) {
         userService.addUser(user);
         return "redirect:/admin/users";
     }
