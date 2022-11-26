@@ -28,7 +28,7 @@ public class AdminsController {
     }
 
     @GetMapping("/edit/{id}")
-    public String editUser(@PathVariable int id, Model model) {
+    public String getUserFromForUpdate(@PathVariable int id, Model model) {
         model.addAttribute("user", userService.findById(id));
         model.addAttribute("roleList", roleService.findAll());
         return "admin/userEditPage";
@@ -47,13 +47,13 @@ public class AdminsController {
     }
 
     @GetMapping("/users/new")
-    public String newUserForm(@ModelAttribute("user") User user, Model model) {
+    public String getUserFormForCreate(@ModelAttribute("user") User user, Model model) {
         model.addAttribute("rolesList", roleService.findAll());
         return "admin/new";
     }
 
     @PostMapping("/new")
-    public String addNewUser(@ModelAttribute("user") User user) {
+    public String CreateUser(@ModelAttribute("user") User user) {
         userService.addUser(user);
         return "redirect:/admin/users";
     }
