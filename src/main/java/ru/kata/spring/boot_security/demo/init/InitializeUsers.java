@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Set;
 
 @Component
-public class InitializeUsers{
+public class InitializeUsers {
     private final UserService userService;
     private final RoleService roleService;
 
@@ -23,6 +23,7 @@ public class InitializeUsers{
         this.userService = userService;
         this.roleService = roleService;
     }
+
     Role adminRole = new Role("ROLE_ADMIN");
     Role userRole = new Role("ROLE_USER");
 
@@ -30,8 +31,8 @@ public class InitializeUsers{
     private final Set<Role> roles2 = new HashSet<>(Set.of(userRole));
 
 
-    private final User admin = new User( "admin", "admin", roles1);
-    private final User user = new User( "user", "user", roles2);
+    private final User admin = new User("admin", "admin", roles1);
+    private final User user = new User("user", "user", roles2);
 
 
     @Transactional
