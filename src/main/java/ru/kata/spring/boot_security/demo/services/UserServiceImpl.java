@@ -12,6 +12,7 @@ import ru.kata.spring.boot_security.demo.repositories.UserRepository;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Transactional(readOnly = true)
@@ -50,8 +51,8 @@ public class UserServiceImpl implements UserService {
     @Transactional
     public void addUser(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        List<Role> userRoles = user.getRoles().stream().map(role -> roleService.findRoleByRole(role.getRole()))
-                .collect(Collectors.toList());
+        Set<Role> userRoles = user.getRoles().stream().map(role -> roleService.findRoleByRole(role.getRole()))
+                .collect(Collectors.toSet());
         user.setRoles(userRoles);
         userRepository.save(user);
     }
