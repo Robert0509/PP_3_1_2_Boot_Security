@@ -2,15 +2,14 @@ package ru.kata.spring.boot_security.demo.init;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import ru.kata.spring.boot_security.demo.models.Role;
-import ru.kata.spring.boot_security.demo.models.User;
-import ru.kata.spring.boot_security.demo.services.RoleService;
-import ru.kata.spring.boot_security.demo.services.UserService;
+import ru.kata.spring.boot_security.demo.model.Role;
+import ru.kata.spring.boot_security.demo.model.User;
+import ru.kata.spring.boot_security.demo.service.RoleService;
+import ru.kata.spring.boot_security.demo.service.UserService;
 
 import javax.transaction.Transactional;
 import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 @Component
@@ -41,5 +40,32 @@ public class InitializeUsers {
         roleService.save(userRole);
         userService.addUser(admin);
         userService.addUser(user);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        InitializeUsers that = (InitializeUsers) o;
+        return Objects.equals(userService, that.userService) && Objects.equals(roleService, that.roleService) && Objects.equals(adminRole, that.adminRole) && Objects.equals(userRole, that.userRole) && Objects.equals(roles1, that.roles1) && Objects.equals(roles2, that.roles2) && Objects.equals(admin, that.admin) && Objects.equals(user, that.user);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(userService, roleService, adminRole, userRole, roles1, roles2, admin, user);
+    }
+
+    @Override
+    public String toString() {
+        return "InitializeUsers{" +
+                "userService=" + userService +
+                ", roleService=" + roleService +
+                ", adminRole=" + adminRole +
+                ", userRole=" + userRole +
+                ", roles1=" + roles1 +
+                ", roles2=" + roles2 +
+                ", admin=" + admin +
+                ", user=" + user +
+                '}';
     }
 }

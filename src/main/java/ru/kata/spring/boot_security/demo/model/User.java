@@ -1,4 +1,4 @@
-package ru.kata.spring.boot_security.demo.models;
+package ru.kata.spring.boot_security.demo.model;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -24,6 +24,10 @@ public class User implements UserDetails {
             inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
     private Set<Role> roles;
 
+
+    public User() {
+    }
+
     public User(String username,
                 String password, Set<Role> roles) {
 
@@ -32,10 +36,6 @@ public class User implements UserDetails {
         this.roles = roles;
         roles.forEach(role -> role.setUsers(Collections.singleton(this)));
     }
-
-    public User() {
-    }
-
 
     public int getId() {
         return id;
