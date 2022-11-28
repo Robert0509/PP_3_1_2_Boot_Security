@@ -12,17 +12,17 @@ public class Role implements GrantedAuthority {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @Column(name = "role")
+    private String roleName;
 
-    private String role;
-
-    @ManyToMany(mappedBy = "roles")
-    private Set<User> users;
+    @ManyToMany(mappedBy = "rolesSet")
+    private Set<User> usersSet;
 
     public Role() {
     }
 
-    public Role(String role) {
-        this.role = role;
+    public Role(String roleName) {
+        this.roleName = roleName;
     }
 
 
@@ -34,25 +34,25 @@ public class Role implements GrantedAuthority {
         this.id = id;
     }
 
-    public String getRole() {
-        return role;
+    public String getRoleName() {
+        return roleName;
     }
 
-    public void setRole(String role) {
-        this.role = role;
+    public void setRoleName(String roleName) {
+        this.roleName = roleName;
     }
 
-    public Set<User> getUsers() {
-        return users;
+    public Set<User> getUsersSet() {
+        return usersSet;
     }
 
-    public void setUsers(Set<User> users) {
-        this.users = users;
+    public void setUsersSet(Set<User> usersSet) {
+        this.usersSet = usersSet;
     }
 
     @Override
     public String getAuthority() {
-        return this.getRole();
+        return this.getRoleName();
     }
 
 
@@ -61,19 +61,19 @@ public class Role implements GrantedAuthority {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Role role1 = (Role) o;
-        return id == role1.id && Objects.equals(role, role1.role) && Objects.equals(users, role1.users);
+        return id == role1.id && Objects.equals(roleName, role1.roleName) && Objects.equals(usersSet, role1.usersSet);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, role);
+        return Objects.hash(id, roleName);
     }
 
     @Override
     public String toString() {
         return "Role{" +
                 "id=" + id +
-                ", role='" + role + '\'' +
+                ", roleName='" + roleName + '\'' +
                 '}';
     }
 

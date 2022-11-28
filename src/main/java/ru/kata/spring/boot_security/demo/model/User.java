@@ -14,27 +14,28 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-
+    @Column(name="username")
     private String username;
 
+    @Column(name = "password")
     private String password;
 
     @ManyToMany
     @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
-    private Set<Role> roles;
+    private Set<Role> rolesSet;
 
 
     public User() {
     }
 
     public User(String username,
-                String password, Set<Role> roles) {
+                String password, Set<Role> rolesSet) {
 
         this.username = username;
         this.password = password;
-        this.roles = roles;
-        roles.forEach(role -> role.setUsers(Collections.singleton(this)));
+        this.rolesSet = rolesSet;
+        rolesSet.forEach(role -> role.setUsersSet(Collections.singleton(this)));
     }
 
     public int getId() {
@@ -49,17 +50,17 @@ public class User implements UserDetails {
         this.id = id;
     }
 
-    public Set<Role> getRoles() {
-        return roles;
+    public Set<Role> getRolesSet() {
+        return rolesSet;
     }
 
-    public void setRoles(Set<Role> roles) {
-        this.roles = roles;
+    public void setRolesSet(Set<Role> rolesSet) {
+        this.rolesSet = rolesSet;
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return roles;
+        return rolesSet;
     }
 
     @Override
@@ -102,7 +103,7 @@ public class User implements UserDetails {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return id == user.id && Objects.equals(username, user.username) && Objects.equals(password, user.password) && Objects.equals(roles, user.roles);
+        return id == user.id && Objects.equals(username, user.username) && Objects.equals(password, user.password) && Objects.equals(rolesSet, user.rolesSet);
     }
 
     @Override

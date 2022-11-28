@@ -40,7 +40,7 @@ public class UserServiceImpl implements UserService {
         Optional<User> optionalUser = userRepository.findById(id);
         if (optionalUser.isPresent()) {
             User user = optionalUser.get();
-            Hibernate.initialize(user.getRoles());
+            Hibernate.initialize(user.getRolesSet());
             return user;
         } else {
             throw new UsernameNotFoundException("No user with such id");
@@ -51,9 +51,9 @@ public class UserServiceImpl implements UserService {
     @Transactional
     public void addUser(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        Set<Role> userRoles = user.getRoles().stream().map(role -> roleService.findRoleByRole(role.getRole()))
+        Set<Role> userRoles = user.getRolesSet().stream().map(role -> roleService.findRoleByRole(role.getRoleName()))
                 .collect(Collectors.toSet());
-        user.setRoles(userRoles);
+        user.setRolesSet(userRoles);
         userRepository.save(user);
     }
 
@@ -75,7 +75,7 @@ public class UserServiceImpl implements UserService {
         Optional<User> optionalUser = userRepository.findUserByUsername(username);
         if (optionalUser.isPresent()) {
             User user = optionalUser.get();
-            Hibernate.initialize(user.getRoles());
+            Hibernate.initialize(user.getRolesSet());
             return user;
         } else
             throw new UsernameNotFoundException("No user with such username");
