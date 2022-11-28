@@ -14,10 +14,9 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name="username")
+
     private String username;
 
-    @Column(name = "password")
     private String password;
 
     @ManyToMany
@@ -30,12 +29,12 @@ public class User implements UserDetails {
     }
 
     public User(String username,
-                String password, Set<Role> rolesSet) {
+                String password, Set<Role> roles) {
 
         this.username = username;
         this.password = password;
-        this.rolesSet = rolesSet;
-        rolesSet.forEach(role -> role.setUsersSet(Collections.singleton(this)));
+        this.rolesSet = roles;
+        roles.forEach(role -> role.setUsersSET(Collections.singleton(this)));
     }
 
     public int getId() {

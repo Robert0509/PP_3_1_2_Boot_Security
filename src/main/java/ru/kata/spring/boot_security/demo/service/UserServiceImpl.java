@@ -51,7 +51,7 @@ public class UserServiceImpl implements UserService {
     @Transactional
     public void addUser(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        Set<Role> userRoles = user.getRolesSet().stream().map(role -> roleService.findRoleByRole(role.getRoleName()))
+        Set<Role> userRoles = user.getRolesSet().stream().map(role -> roleService.findRoleByRole(role.getRole()))
                 .collect(Collectors.toSet());
         user.setRolesSet(userRoles);
         userRepository.save(user);

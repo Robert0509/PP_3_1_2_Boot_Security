@@ -13,16 +13,16 @@ public class Role implements GrantedAuthority {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @Column(name = "role")
-    private String roleName;
+    private String role;
 
     @ManyToMany(mappedBy = "rolesSet")
-    private Set<User> usersSet;
+    private Set<User> usersSET;
 
     public Role() {
     }
 
-    public Role(String roleName) {
-        this.roleName = roleName;
+    public Role(String role) {
+        this.role = role;
     }
 
 
@@ -34,25 +34,25 @@ public class Role implements GrantedAuthority {
         this.id = id;
     }
 
-    public String getRoleName() {
-        return roleName;
+    public String getRole() {
+        return role;
     }
 
-    public void setRoleName(String roleName) {
-        this.roleName = roleName;
+    public void setRole(String role) {
+        this.role = role;
     }
 
-    public Set<User> getUsersSet() {
-        return usersSet;
+    public Set<User> getUsersSET() {
+        return usersSET;
     }
 
-    public void setUsersSet(Set<User> usersSet) {
-        this.usersSet = usersSet;
+    public void setUsersSET(Set<User> usersSET) {
+        this.usersSET = usersSET;
     }
 
     @Override
     public String getAuthority() {
-        return this.getRoleName();
+        return this.getRole();
     }
 
 
@@ -61,19 +61,19 @@ public class Role implements GrantedAuthority {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Role role1 = (Role) o;
-        return id == role1.id && Objects.equals(roleName, role1.roleName) && Objects.equals(usersSet, role1.usersSet);
+        return id == role1.id && Objects.equals(role, role1.role) && Objects.equals(usersSET, role1.usersSET);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, roleName);
+        return Objects.hash(id, role);
     }
 
     @Override
     public String toString() {
         return "Role{" +
                 "id=" + id +
-                ", roleName='" + roleName + '\'' +
+                ", role='" + role + '\'' +
                 '}';
     }
 

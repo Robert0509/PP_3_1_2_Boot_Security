@@ -14,7 +14,7 @@
 
     </thead>
     <tbody>
-    <tr th:each="user : ${users}">
+    <tr th:each="user : ${usersSET}">
         <td th:text="${user.username}">Name</td>
         <td th:text="${user.password}">Surname</td>
 
@@ -32,7 +32,7 @@
     </tbody>
 </table>
 <hr>
-<form th:method="GET" th:action="@{/admin/users/new}">
+<form th:method="GET" th:action="@{/admin/usersSET/new}">
     <input type="submit" value="Create new user">
 </form>
 <form th:method="GET" th:action="@{/logout}">
