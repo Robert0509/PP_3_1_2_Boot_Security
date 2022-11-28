@@ -17,11 +17,6 @@ public class InitializeUsers {
     private final UserService userService;
     private final RoleService roleService;
 
-    @Autowired
-    public InitializeUsers(UserService userService, RoleService roleService) {
-        this.userService = userService;
-        this.roleService = roleService;
-    }
 
     Role adminRole = new Role("ROLE_ADMIN");
     Role userRole = new Role("ROLE_USER");
@@ -33,6 +28,11 @@ public class InitializeUsers {
     private final User admin = new User("admin", "admin", roles1);
     private final User user = new User("user", "user", roles2);
 
+    @Autowired
+    public InitializeUsers(UserService userService, RoleService roleService) {
+        this.userService = userService;
+        this.roleService = roleService;
+    }
 
     @Transactional
     public void init() {
