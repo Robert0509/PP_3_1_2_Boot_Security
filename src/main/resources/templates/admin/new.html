@@ -14,7 +14,7 @@
     <br>
     <label for="rolesSet">Roles</label>
         <select id="rolesSet" multiple="multiple" th:field="*{rolesSet}">
-            <option th:each="role : ${rolesList}" th:value="${role.id}" th:text="${role.role}"></option>
+            <option th:each="roleName : ${rolesList}" th:value="${roleName.id}" th:text="${roleName.roleName}"></option>
         </select>
     <hr>
     <input type="submit" value="Add user">

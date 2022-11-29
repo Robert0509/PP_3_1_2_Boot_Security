@@ -12,7 +12,7 @@
     <br>
     <label for="rolesSet">Roles</label>
     <select id="rolesSet" multiple="multiple" th:field="*{rolesSet}">
-        <option th:each="role : ${roleList}" th:value="${role.id}" th:text="${role.role}"></option>
+        <option th:each="roleName : ${roleList}" th:value="${roleName.id}" th:text="${roleName.roleName}"></option>
     </select>
     <hr>
     <input type="submit" value="Update user">

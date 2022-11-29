@@ -12,8 +12,8 @@ public class Role implements GrantedAuthority {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @Column(name = "role")
-    private String role;
+    @Column(name = "name")
+    private String roleName;
 
     @ManyToMany(mappedBy = "rolesSet")
     private Set<User> usersSET;
@@ -22,7 +22,7 @@ public class Role implements GrantedAuthority {
     }
 
     public Role(String role) {
-        this.role = role;
+        this.roleName = role;
     }
 
 
@@ -34,12 +34,12 @@ public class Role implements GrantedAuthority {
         this.id = id;
     }
 
-    public String getRole() {
-        return role;
+    public String getRoleName() {
+        return roleName;
     }
 
-    public void setRole(String role) {
-        this.role = role;
+    public void setRoleName(String roleName) {
+        this.roleName = roleName;
     }
 
     public Set<User> getUsersSET() {
@@ -52,7 +52,7 @@ public class Role implements GrantedAuthority {
 
     @Override
     public String getAuthority() {
-        return this.getRole();
+        return this.getRoleName();
     }
 
 
@@ -61,19 +61,19 @@ public class Role implements GrantedAuthority {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Role role1 = (Role) o;
-        return id == role1.id && Objects.equals(role, role1.role) && Objects.equals(usersSET, role1.usersSET);
+        return id == role1.id && Objects.equals(roleName, role1.roleName) && Objects.equals(usersSET, role1.usersSET);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, role);
+        return Objects.hash(id, roleName);
     }
 
     @Override
     public String toString() {
         return "Role{" +
                 "id=" + id +
-                ", role='" + role + '\'' +
+                ", roleName='" + roleName + '\'' +
                 '}';
     }
 
